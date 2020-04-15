@@ -1,7 +1,8 @@
 {
   "name": "middleware-logger",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.ts",
+  "types": "dist/index.d.ts",
   "repository": "git@github.com:patrikoliveira/bbce-middleware-logger.git",
   "author": "Patrik Oliveira <patrik.oliveira@rarolabs.com.br>",
   "license": "proprietary",
