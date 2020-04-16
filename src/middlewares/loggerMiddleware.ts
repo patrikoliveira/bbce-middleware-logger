@@ -6,7 +6,7 @@ import { LoggerService } from "../services/loggerService";
 import { Log } from "../interfaces/log";
 
 @Service("loggerMiddleware")
-export class LoggerMiddleware {
+class LoggerMiddleware {
   private loggerService: LoggerService;
 
   constructor(@Inject("loggerService") loggerService: LoggerService) {
@@ -46,3 +46,5 @@ export class LoggerMiddleware {
     next();
   }
 }
+
+export default LoggerMiddleware;
