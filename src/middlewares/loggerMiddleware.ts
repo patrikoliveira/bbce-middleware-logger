@@ -10,7 +10,8 @@ import { Log } from "../interfaces/log";
 export class LoggerMiddleware {
   private loggerService: LoggerService;
 
-  constructor(@Inject("loggerService") loggerService: LoggerService) {
+  // constructor(@Inject("loggerService") loggerService: LoggerService) {
+  constructor(loggerService: LoggerService) {
     this.loggerService = loggerService;
   }
 
@@ -31,7 +32,7 @@ export class LoggerMiddleware {
 
   async registrarLog(req: Request, res: Response, next: NextFunction): Promise<Response> {
     const { method } = req;
-    console.log(this.getPayload(req));
+
     if (method !== "GET") {
       const log = this.getPayload(req);
 
@@ -52,7 +53,6 @@ export class LoggerMiddleware {
   }
 }
 
-@Service()
 export class LoggerMiddlewareFactory {
   static create(baseUrl: string): LoggerMiddleware {
     const loggerApi = axios.create({
