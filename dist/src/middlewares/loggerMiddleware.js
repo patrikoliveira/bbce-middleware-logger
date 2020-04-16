@@ -95,12 +95,13 @@ var LoggerMiddleware = /** @class */ (function () {
                             log_1.timestamp = new Date().getTime();
                             _this.loggerService.info(log_1);
                         });
-                        next();
                         return [3 /*break*/, 4];
                     case 3:
                         error_1 = _a.sent();
                         return [2 /*return*/, res.status(504).json({ error: { message: error_1.message, name: error_1.name, code: error_1.code } })];
-                    case 4: return [2 /*return*/];
+                    case 4:
+                        next();
+                        return [2 /*return*/];
                 }
             });
         });

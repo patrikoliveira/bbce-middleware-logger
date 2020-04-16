@@ -44,11 +44,11 @@ export class LoggerMiddleware {
 
           this.loggerService.info(log);
         });
-        next();
       } catch (error) {
         return res.status(504).json({ error: { message: error.message, name: error.name, code: error.code } });
       }
     }
+    next();
   }
 }
 
