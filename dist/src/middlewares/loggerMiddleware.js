@@ -75,26 +75,32 @@ var LoggerMiddleware = /** @class */ (function () {
     };
     LoggerMiddleware.prototype.registrarLog = function (req, res, next) {
         return __awaiter(this, void 0, void 0, function () {
-            var method, log_1;
+            var method, log_1, error_1;
             var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         method = req.method;
-                        if (!(method !== "GET")) return [3 /*break*/, 2];
+                        console.log(this.getPayload(req));
+                        if (!(method !== "GET")) return [3 /*break*/, 4];
                         log_1 = this.getPayload(req);
-                        return [4 /*yield*/, this.loggerService.info(log_1)];
+                        _a.label = 1;
                     case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.loggerService.info(log_1)];
+                    case 2:
                         _a.sent();
                         on_finished_1.default(res, function (err, response) {
                             log_1.statusCode = response.statusCode;
                             log_1.timestamp = new Date().getTime();
                             _this.loggerService.info(log_1);
                         });
-                        _a.label = 2;
-                    case 2:
                         next();
-                        return [2 /*return*/];
+                        return [3 /*break*/, 4];
+                    case 3:
+                        error_1 = _a.sent();
+                        return [2 /*return*/, res.status(504).json({ error: { message: error_1.message, name: error_1.name, code: error_1.code } })];
+                    case 4: return [2 /*return*/];
                 }
             });
         });
@@ -117,6 +123,17 @@ var LoggerMiddlewareFactory = /** @class */ (function () {
         var loggerService = new loggerService_1.LoggerService(loggerApi);
         return new LoggerMiddleware(loggerService);
     };
+    LoggerMiddlewareFactory.createWithAPI = function (loggerApi) {
+        var _loggerApi = loggerApi;
+        var loggerService = new loggerService_1.LoggerService(_loggerApi);
+        return new LoggerMiddleware(loggerService);
+    };
+    __decorate([
+        __param(0, typedi_1.Inject("loggerAPI")),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [Function]),
+        __metadata("design:returntype", LoggerMiddleware)
+    ], LoggerMiddlewareFactory, "createWithAPI", null);
     LoggerMiddlewareFactory = __decorate([
         typedi_1.Service()
     ], LoggerMiddlewareFactory);
