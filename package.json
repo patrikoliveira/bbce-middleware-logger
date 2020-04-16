@@ -2,6 +2,9 @@
   "name": "middleware-logger",
   "version": "0.0.1",
   "main": "index.ts",
+  "scripts": {
+    "compile": "rm -rf dist && npx tsc"
+  },
   "repository": "git@github.com:patrikoliveira/bbce-middleware-logger.git",
   "author": "Patrik Oliveira <patrik.oliveira@rarolabs.com.br>",
   "license": "proprietary",
