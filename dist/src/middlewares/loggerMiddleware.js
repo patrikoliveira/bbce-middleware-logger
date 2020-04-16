@@ -57,6 +57,7 @@ var uuidv4_1 = require("uuidv4");
 var axios_1 = __importDefault(require("axios"));
 var loggerService_1 = require("../services/loggerService");
 var LoggerMiddleware = /** @class */ (function () {
+    // constructor(@Inject("loggerService") loggerService: LoggerService) {
     function LoggerMiddleware(loggerService) {
         this.loggerService = loggerService;
     }
@@ -81,7 +82,6 @@ var LoggerMiddleware = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         method = req.method;
-                        console.log(this.getPayload(req));
                         if (!(method !== "GET")) return [3 /*break*/, 4];
                         log_1 = this.getPayload(req);
                         _a.label = 1;
@@ -108,7 +108,6 @@ var LoggerMiddleware = /** @class */ (function () {
     };
     LoggerMiddleware = __decorate([
         typedi_1.Service("loggerMiddleware"),
-        __param(0, typedi_1.Inject("loggerService")),
         __metadata("design:paramtypes", [loggerService_1.LoggerService])
     ], LoggerMiddleware);
     return LoggerMiddleware;
@@ -135,9 +134,6 @@ var LoggerMiddlewareFactory = /** @class */ (function () {
         __metadata("design:paramtypes", [Function]),
         __metadata("design:returntype", LoggerMiddleware)
     ], LoggerMiddlewareFactory, "createWithAPI", null);
-    LoggerMiddlewareFactory = __decorate([
-        typedi_1.Service()
-    ], LoggerMiddlewareFactory);
     return LoggerMiddlewareFactory;
 }());
 exports.LoggerMiddlewareFactory = LoggerMiddlewareFactory;
