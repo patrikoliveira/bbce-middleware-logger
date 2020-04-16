@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import onFinished from "on-finished";
 import { Service, Inject } from "typedi";
 import { uuid } from "uuidv4";
-import axios from "axios";
+import axios, { AxiosInstance } from "axios";
 import { LoggerService } from "../services/loggerService";
 import { Log } from "../interfaces/log";
 
@@ -29,22 +29,26 @@ export class LoggerMiddleware {
     };
   }
 
-  async registrarLog(req: Request, res: Response, next: NextFunction): Promise<void> {
+  async registrarLog(req: Request, res: Response, next: NextFunction): Promise<Response> {
     const { method } = req;
-
+    console.log(this.getPayload(req));
     if (method !== "GET") {
       const log = this.getPayload(req);
 
-      await this.loggerService.info(log);
+      try {
+        await this.loggerService.info(log);
 
-      onFinished(res, (err, response: Response) => {
-        log.statusCode = response.statusCode;
-        log.timestamp = new Date().getTime();
+        onFinished(res, (err, response: Response) => {
+          log.statusCode = response.statusCode;
+          log.timestamp = new Date().getTime();
 
-        this.loggerService.info(log);
-      });
+          this.loggerService.info(log);
+        });
+        next();
+      } catch (error) {
+        return res.status(504).json({ error: { message: error.message, name: error.name, code: error.code } });
+      }
     }
-    next();
   }
 }
 
@@ -55,6 +59,14 @@ export class LoggerMiddlewareFactory {
       baseURL: baseUrl,
     });
     const loggerService = new LoggerService(loggerApi);
+
+    return new LoggerMiddleware(loggerService);
+  }
+
+  static createWithAPI(@Inject("loggerAPI") loggerApi: AxiosInstance): LoggerMiddleware {
+    const _loggerApi: AxiosInstance = loggerApi;
+
+    const loggerService = new LoggerService(_loggerApi);
 
     return new LoggerMiddleware(loggerService);
   }
