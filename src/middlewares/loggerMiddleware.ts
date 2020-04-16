@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import onFinished from "on-finished";
 import { Service, Inject } from "typedi";
 import { uuid } from "uuidv4";
+import axios from "axios";
 import { LoggerService } from "../services/loggerService";
 import { Log } from "../interfaces/log";
 
@@ -44,5 +45,17 @@ export class LoggerMiddleware {
       });
     }
     next();
+  }
+}
+
+@Service()
+export class LoggerMiddlewareFactory {
+  static create(baseUrl: string): LoggerMiddleware {
+    const loggerApi = axios.create({
+      baseURL: baseUrl,
+    });
+    const loggerService = new LoggerService(loggerApi);
+
+    return new LoggerMiddleware(loggerService);
   }
 }
