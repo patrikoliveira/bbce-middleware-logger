@@ -1,7 +1,8 @@
 {
   "name": "middleware-logger",
   "version": "0.0.1",
-  "main": "index.ts",
+  "main": "./dist/index.ts",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "compile": "rm -rf dist && npx tsc"
   },
