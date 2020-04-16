@@ -4,7 +4,11 @@
   "main": "./dist/index.ts",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "compile": "rm -rf dist && npx tsc"
+    "compile": "rm -rf dist && npx tsc",
+    "deploy": "npm run build:ts && npm run build:js && npm run build:min",
+    "build:ts": "node_modules/.bin/tsc -b",
+    "build:js": "node_modules/.bin/rollup -c rollup.config.js --environment BUILD:development",
+    "build:min": "node_modules/.bin/rollup -c rollup.config.js --environment INCLUDE_DEPS,BUILD:minify"
   },
   "repository": "git@github.com:patrikoliveira/bbce-middleware-logger.git",
   "author": "Patrik Oliveira <patrik.oliveira@rarolabs.com.br>",
