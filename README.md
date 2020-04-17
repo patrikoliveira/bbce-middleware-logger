@@ -30,7 +30,7 @@ Registrar o Middleware no arquivo de dependências:
 Container.set("loggerMiddleware", LoggerMiddlewareFactory.create(process.env.LOGGER_BASE_PATH));
 ```
 
-No index, adicione-o como middleware global, como exemplo abaixo.
+No index, adicione-o como middleware global, como exemplo abaixo:
 ```
 const middleware = Container.get<LoggerMiddleware>("loggerMiddleware");
 app.use(middleware.registrarLog.bind(middleware));
