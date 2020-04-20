@@ -6,7 +6,7 @@
   "readmeFilename": "README.md",
   "scripts": {
     "compile": "rm -rf dist && npx tsc",
-    "deploy": "npm run build:ts",
+    "deploy": "rm -rf dist && npm run build:ts",
     "build:ts": "node_modules/.bin/tsc -b"
   },
   "repository": {
