@@ -1,6 +1,6 @@
 {
   "name": "middleware-logger",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "readmeFilename": "README.md",
@@ -17,6 +17,7 @@
     "name": "Patrik Oliveira",
     "email": "patrikro.oliveira@gmail.com"
   },
+  "license": "proprietary",
   "private": false,
   "dependencies": {
     "@types/on-finished": "^2.3.1",
