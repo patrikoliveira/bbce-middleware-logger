@@ -3,17 +3,21 @@
   "version": "0.0.1",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "readmeFilename": "README.md",
   "scripts": {
     "compile": "rm -rf dist && npx tsc",
-    "deploy": "npm run build:ts && npm run build:js && npm run build:min",
-    "build:ts": "node_modules/.bin/tsc -b",
-    "build:js": "node_modules/.bin/rollup -c rollup.config.js --environment BUILD:development",
-    "build:min": "node_modules/.bin/rollup -c rollup.config.js --environment INCLUDE_DEPS,BUILD:minify"
+    "deploy": "npm run build:ts",
+    "build:ts": "node_modules/.bin/tsc -b"
   },
-  "repository": "git@github.com:patrikoliveira/bbce-middleware-logger.git",
-  "author": "Patrik Oliveira <patrik.oliveira@rarolabs.com.br>",
-  "license": "proprietary",
-  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/patrikoliveira/bbce-middleware-logger"
+  },
+  "author": {
+    "name": "Patrik Oliveira",
+    "email": "patrikro.oliveira@gmail.com"
+  },
+  "private": false,
   "dependencies": {
     "@types/on-finished": "^2.3.1",
     "@typescript-eslint/eslint-plugin": "^2.28.0",
