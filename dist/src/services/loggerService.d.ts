@@ -1,8 +1,8 @@
 import { AxiosInstance } from "axios";
-import { Log } from "../interfaces/log";
+import { ILog } from "../interfaces/log";
 export declare class LoggerService {
     private loggerApi;
     constructor(loggerApi: AxiosInstance);
     private postLogger;
-    info(log: Log): Promise<void>;
+    info(log: ILog): Promise<void>;
 }

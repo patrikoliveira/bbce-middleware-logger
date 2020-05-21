@@ -1,4 +1,4 @@
-export interface Log {
+export interface ILog {
   timestamp: number;
   userId: number;
   httpMethod: string;

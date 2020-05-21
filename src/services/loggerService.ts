@@ -1,6 +1,6 @@
 import { Service, Inject } from "typedi";
 import { AxiosInstance } from "axios";
-import { Log } from "../interfaces/log";
+import { ILog } from "../interfaces/log";
 
 @Service("loggerService")
 // eslint-disable-next-line import/prefer-default-export
@@ -11,11 +11,11 @@ export class LoggerService {
     this.loggerApi = loggerApi;
   }
 
-  private async postLogger(log: Log): Promise<Response> {
+  private async postLogger(log: ILog): Promise<Response> {
     return this.loggerApi.post("/logger", log);
   }
 
-  async info(log: Log): Promise<void> {
+  async info(log: ILog): Promise<void> {
     await this.postLogger(log);
   }
 }

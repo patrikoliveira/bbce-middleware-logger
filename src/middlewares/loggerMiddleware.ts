@@ -5,7 +5,7 @@ import { Service, Inject } from "typedi";
 import { uuid } from "uuidv4";
 import axios, { AxiosInstance } from "axios";
 import { LoggerService } from "../services/loggerService";
-import { Log } from "../interfaces/log";
+import { ILog } from "../interfaces/log";
 
 @Service("loggerMiddleware")
 export class LoggerMiddleware {
@@ -15,7 +15,7 @@ export class LoggerMiddleware {
     this.loggerService = loggerService;
   }
 
-  private getPayload(req: Request): Log {
+  private getPayload(req: Request): ILog {
     const { body } = req;
     const { method } = req;
 
