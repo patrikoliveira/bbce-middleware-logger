@@ -21,34 +21,24 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LoggerService = void 0;
 const typedi_1 = require("typedi");
-let LoggerService = /** @class */ (() => {
-    let LoggerService = 
-    // eslint-disable-next-line import/prefer-default-export
-    class LoggerService {
-        constructor(loggerApi) {
-            this.loggerApi = loggerApi;
+let FuncionamentoBBCEApi = /** @class */ (() => {
+    let FuncionamentoBBCEApi = class FuncionamentoBBCEApi {
+        constructor(clientApi) {
+            this.clientApi = clientApi;
         }
-        postLogger(log) {
+        getFuncionamentoBBCE() {
             return __awaiter(this, void 0, void 0, function* () {
-                return this.loggerApi.post("/logger", log);
-            });
-        }
-        info(log) {
-            return __awaiter(this, void 0, void 0, function* () {
-                yield this.postLogger(log);
+                return (yield this.clientApi.get(`funcionamento-BBCE`)).data;
             });
         }
     };
-    LoggerService = __decorate([
-        typedi_1.Service("loggerService")
-        // eslint-disable-next-line import/prefer-default-export
-        ,
-        __param(0, typedi_1.Inject("loggerAPI")),
+    FuncionamentoBBCEApi = __decorate([
+        typedi_1.Service("funcionamentoBBCEApi"),
+        __param(0, typedi_1.Inject("clientApi")),
         __metadata("design:paramtypes", [Function])
-    ], LoggerService);
-    return LoggerService;
+    ], FuncionamentoBBCEApi);
+    return FuncionamentoBBCEApi;
 })();
-exports.LoggerService = LoggerService;
-//# sourceMappingURL=loggerService.js.map
+exports.default = FuncionamentoBBCEApi;
+//# sourceMappingURL=funcionamentoBBCEApi.js.map

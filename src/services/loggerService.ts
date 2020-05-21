@@ -3,6 +3,7 @@ import { AxiosInstance } from "axios";
 import { Log } from "../interfaces/log";
 
 @Service("loggerService")
+// eslint-disable-next-line import/prefer-default-export
 export class LoggerService {
   private loggerApi: AxiosInstance;
 
@@ -11,7 +12,7 @@ export class LoggerService {
   }
 
   private async postLogger(log: Log): Promise<Response> {
-    return await this.loggerApi.post("/logger", log);
+    return this.loggerApi.post("/logger", log);
   }
 
   async info(log: Log): Promise<void> {

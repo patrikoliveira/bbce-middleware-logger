@@ -1,3 +1,4 @@
+// eslint-disable-next-line max-classes-per-file
 import { Request, Response, NextFunction } from "express";
 import onFinished from "on-finished";
 import { Service, Inject } from "typedi";
@@ -10,13 +11,12 @@ import { Log } from "../interfaces/log";
 export class LoggerMiddleware {
   private loggerService: LoggerService;
 
-  // constructor(@Inject("loggerService") loggerService: LoggerService) {
   constructor(loggerService: LoggerService) {
     this.loggerService = loggerService;
   }
 
   private getPayload(req: Request): Log {
-    const body = req.body;
+    const { body } = req;
     const { method } = req;
 
     return {
@@ -30,7 +30,7 @@ export class LoggerMiddleware {
     };
   }
 
-  async registrarLog(req: Request, res: Response, next: NextFunction): Promise<Response> {
+  public async registrarLog(req: Request, res: Response, next: NextFunction): Promise<void> {
     const { method } = req;
 
     if (method !== "GET") {
@@ -46,7 +46,7 @@ export class LoggerMiddleware {
           this.loggerService.info(log);
         });
       } catch (error) {
-        return res.status(504).json({ error: { message: error.message, name: error.name, code: error.code } });
+        res.status(504).json({ error: { message: error.message, name: error.name, code: error.code } });
       }
     }
     next();
@@ -64,6 +64,7 @@ export class LoggerMiddlewareFactory {
   }
 
   static createWithAPI(@Inject("loggerAPI") loggerApi: AxiosInstance): LoggerMiddleware {
+    // eslint-disable-next-line no-underscore-dangle
     const _loggerApi: AxiosInstance = loggerApi;
 
     const loggerService = new LoggerService(_loggerApi);
