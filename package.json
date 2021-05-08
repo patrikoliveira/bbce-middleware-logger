@@ -29,7 +29,7 @@
     "express": "^4.17.1",
     "on-finished": "^2.3.0",
     "typedi": "^0.8.0",
-    "typeorm": "^0.2.24",
+    "typeorm": "^0.2.25",
     "uuidv4": "^6.0.7"
   },
   "devDependencies": {
